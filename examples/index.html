@@ -5,32 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tex.js</title>
     <link rel="stylesheet" type="text/css" href="../src/tex.css">
-    <script src="../src/tex.js"></script>
+    <script type="module">
+        import tex from "../src/tex.js";
+
+        const editor1 = tex.init({
+            element: document.getElementById("editor1"),
+            buttons: ['outdent', 'indent','fontSize', 'bold', 'italic', 'underline', 'strikethrough', 'textColor', 'textBackColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
+            onChange: (content) => {
+                console.log("Editor 1:", content);
+            }
+        });
+
+        const editor2 = tex.init({
+            element: document.getElementById("editor2"),
+            buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
+            defaultParagraphSeparator: 'p',
+            styleWithCSS: false,
+            theme: 'dark',
+            onChange: (content) => {
+                console.log("Editor 2:", content);
+            }
+        });
+
+        // tex.destroy(document.getElementById("editor1"));
+    
+    </script>
 </head>
 <body>
     <div id="editor1">Hello</div>
     <textarea id="editor2">Hello world!</textarea>
-
-    <script type="text/javascript">
-    const tex = window.tex;
-    tex.init({
-        element: document.getElementById("editor1"),
-        buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
-        onChange: (content) => {
-            console.log("Editor 1:", content);
-        }
-    });
-
-    tex.init({
-        element: document.getElementById("editor2"),
-        buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
-        defaultParagraphSeparator: 'p',
-        styleWithCSS: false,
-        theme: 'dark',
-        onChange: (content) => {
-            console.log("Editor 2:", content);
-        }
-    });
-    </script>
 </body>
 </html>
