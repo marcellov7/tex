@@ -284,9 +284,12 @@ var init = function init(settings) {
       if (firstChild && firstChild.nodeType === 3) exec(formatBlock, '<' + defaultParagraphSeparator + '>');
       else if (content.innerHTML === '<br>') content.innerHTML = '';
   
+      settings.onChange(content.innerHTML);
+
       if (settings.element.tagName.toLowerCase() === 'textarea') {
         settings.element.value = content.innerHTML;
       }
+      
       htmlContent.value = content.innerHTML;
     };
   
