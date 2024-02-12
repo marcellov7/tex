@@ -2,6 +2,8 @@
 
 TEX is a ultra-lightweight and straightforward JavaScript library for creating rich text editors (WYSIWYG) directly in the browser. It is designed to work with both `<textarea>` and `<div>` elements.
 
+> Live demo: [https://codepen.io/marcellov7/pen/BabGydp](https://codepen.io/marcellov7/pen/BabGydp)
+
 ## Key Features
 
 - Pure JavaScript, no dependencies, written in ES6.
@@ -33,15 +35,26 @@ To use TEX in your project, follow these simple steps:
 
 1. Link TEX to your HTML:
 ```html
+<!--Local-->
+<link rel="stylesheet" type="text/css" href="../src/tex.min.css">
+<!--or CDN-->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.css">
-<script src="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js"></script>
+```
+
+```html
+<script type="module">
+//Local
+import tex from '../src/tex.js'
+//or CDN
+import tex from 'https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js'
+</script>
 ```
 
 3. Add HTML elements where you want to display the text editors:
 
 ```html
 <div id="editor">Hello</div>
-or
+<!--or-->
 <textarea id="editor">Hello</textarea>
 ```
 
@@ -49,14 +62,14 @@ or
 
 ### Initialization
 
-To initialize TEX, use the  `const tex = window.tex;` and `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
+To initialize TEX, use the `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
 
 ```javascript
 const tex = window.tex;
 
 tex.init({
     element: document.getElementById("editor"),
-    buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
+    buttons: ['bold', 'italic', 'underline', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
     onChange: (content) => {
         console.log("Editor :", content);
     }
@@ -88,15 +101,15 @@ tex.destroy(document.getElementById("editor"));
 
 ### List of buttons
 
+- fontSize
 - bold
 - italic
 - underline
 - strikethrough
-- removeFormat
 - heading1
 - heading2
 - paragraph
-- textColor
+- removeFormat
 - quote
 - olist
 - ulist
@@ -105,6 +118,16 @@ tex.destroy(document.getElementById("editor"));
 - link
 - image
 - html
+- textColor
+- textBackColor
+- indent
+- outdent
+- undo
+- redo
+- justifyCenter
+- justifyFull
+- justifyLeft
+- justifyRight
 
 ## Styles
 For example:
