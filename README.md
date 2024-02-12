@@ -64,7 +64,7 @@ import tex from 'https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js'
 
 To initialize TEX, use the `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
 
-```javascript
+```javascript 
 tex.init({
     element: document.getElementById("editor"),
     buttons: ['bold', 'italic', 'underline', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
