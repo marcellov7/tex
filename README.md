@@ -35,19 +35,8 @@ To use TEX in your project, follow these simple steps:
 
 1. Link TEX to your HTML:
 ```html
-<!--Local-->
-<link rel="stylesheet" type="text/css" href="../src/tex.min.css">
-<!--or CDN-->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.css">
-```
-
-```html
-<script type="module">
-//Local
-import tex from '../src/tex.js'
-//or CDN
-import tex from 'https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js'
-</script>
+<script src="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js"></script>
 ```
 
 3. Add HTML elements where you want to display the text editors:
@@ -65,6 +54,8 @@ import tex from 'https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js'
 To initialize TEX, use the `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
 
 ```javascript 
+const tex = window.tex;
+
 tex.init({
     element: document.getElementById("editor"),
     buttons: ['bold', 'italic', 'underline', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
@@ -72,6 +63,14 @@ tex.init({
         console.log("Editor :", content);
     }
 });
+```
+
+### API
+```javascript 
+// ES6
+import tex from 'tex'
+// or
+import { exec, init, destroy, getContent } from 'tex'
 ```
 
 ### Parameters
@@ -83,16 +82,19 @@ tex.init({
 - `theme`: 'dark' | default (light),
 - `onChange`: A callback function to be executed when the content of the editor changes.
 
-For a complete list of available actions/buttons and their configurations, refer to the Tex.js documentation.
-
 ### Get Content
-
 ```javascript
 tex.getContent(document.getElementById("editor"));
 ```
 
-### Destroy
+### Exec
+```javascript
+// Execute a document command.
+// Reference: https://developer.mozilla.org/en/docs/Web/API/Document/execCommand
+tex.exec(command<string>, value<string>)
+```
 
+### Destroy
 ```javascript
 tex.destroy(document.getElementById("editor"));
 ```
