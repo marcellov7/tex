@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tex.js</title>
-    <link rel="stylesheet" type="text/css" href="../src/tex.min.css">
-    <script src="../src/tex.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/tex.css">
+    <script src="../src/tex.js"></script>
 </head>
 <body>
     <div id="editor1">Hello</div>
@@ -27,7 +27,7 @@
         defaultParagraphSeparator: 'p',
         styleWithCSS: false,
         theme: 'dark',
-        onChange: (html) => {
+        onChange: (content) => {
             console.log("Editor 2:", content);
         }
     });
