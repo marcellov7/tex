@@ -49,7 +49,7 @@ or
 
 ### Initialization
 
-To initialize TEX, use the `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
+To initialize TEX, use the  `const tex = window.tex;` and `tex.init()` method, passing in an object with the desired settings. Here's how you can do it:
 
 ```javascript
 tex.init({
