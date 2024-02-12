@@ -74,6 +74,12 @@ tex.init({
 
 For a complete list of available actions/buttons and their configurations, refer to the Tex.js documentation.
 
+### Destroy
+
+```javascript
+tex.destroy(document.getElementById("editor1"));
+```
+
 ### List of buttons
 
 - bold

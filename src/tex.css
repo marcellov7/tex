@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.tex-container.theme-dark {
+  border-color: #383838;
+}
+
 .tex-content, .htmlContent {
   box-sizing: border-box;
   background-color: #fff;
