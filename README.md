@@ -55,10 +55,10 @@ To initialize TEX, use the  `const tex = window.tex;` and `tex.init()` method, p
 const tex = window.tex;
 
 tex.init({
-    element: document.getElementById("editor1"),
+    element: document.getElementById("editor"),
     buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
     onChange: (content) => {
-        console.log("Editor 1:", content);
+        console.log("Editor :", content);
     }
 });
 ```
