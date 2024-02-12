@@ -215,6 +215,12 @@ var destroy = function destroy(el) {
   }
 };
 
+var getContent = function get(el) {
+  var element = document.querySelector('[tex-id="' + el.id + '"]');
+  var content = element.querySelector('.tex-content');
+  return content.innerHTML;
+};
+
 var init = function init(settings) {
   var theme = settings.theme || 'light';
   var classes = _extends({}, defaultClasses, settings.classes);
@@ -329,11 +335,12 @@ var init = function init(settings) {
   return settings.element;
 };
 
-var tex = { exec: exec, init: init, destroy: destroy};
+var tex = { exec: exec, init: init, destroy: destroy, getContent: getContent};
 
 exports.exec = exec;
 exports.init = init;
 exports.destroy = destroy;
+exports.getContent = getContent;
 exports['default'] = tex;
 
 Object.defineProperty(exports, '__esModule', { value: true });

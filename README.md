@@ -74,10 +74,16 @@ tex.init({
 
 For a complete list of available actions/buttons and their configurations, refer to the Tex.js documentation.
 
+### Get Content
+
+```javascript
+tex.getContent(document.getElementById("editor"));
+```
+
 ### Destroy
 
 ```javascript
-tex.destroy(document.getElementById("editor1"));
+tex.destroy(document.getElementById("editor"));
 ```
 
 ### List of buttons
