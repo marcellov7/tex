@@ -301,7 +301,7 @@ var init = settings => {
     }
 
     actions = settings.buttons.map(buttonKey => {
-        var defaultAction = defaultActions[buttonKey]
+      var defaultAction = defaultActions[buttonKey]
       if (defaultAction) {
         return { icon: defaultAction.icon, title: defaultAction.title, key: buttonKey, result: defaultAction.result }
       }
