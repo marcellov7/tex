@@ -132,6 +132,8 @@ tex.destroy(document.getElementById("editor"));
 - justifyRight
 
 ## Plugins
+> Plugin demo: [https://codepen.io/marcellov7/pen/poYqEMV](https://codepen.io/marcellov7/pen/poYqEMV)
+
 ```js
 var pluginImageUpload = {
     name: 'pluginImageUpload',
