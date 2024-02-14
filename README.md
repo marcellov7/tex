@@ -10,6 +10,7 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 - Simple and intuitive user interface.
 - Wide selection of predefined buttons for text formatting.
 - Support for inserting HTML directly into the editor.
+- Support for plugins.
 - Easily Customizable themes to fit your website design.
 - Ultra lightweight and fast.
 - Light and dark mode.
@@ -20,7 +21,7 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 
 | library       | size (min+gzip) | size (min) | jquery | bootstrap | react | link |
 |---------------|-----------------|------------|--------|-----------|-------|------|
-| TEX          | 1.8kB          | 4.5kB     |        |           |       | https://github.com/marcellov7/tex |
+| TEX          | 2.3kB          | 6.3kB     |        |           |       | https://github.com/marcellov7/tex |
 | quill         | 43kB            | 205kB      |        |           |       | https://github.com/quilljs/quill |
 | trix          | 47kB            | 204kB      |        |           |       | https://github.com/basecamp/trix |
 | ckeditor      | 163kB           | 551kB      |        |           |       | https://ckeditor.com |
@@ -76,9 +77,10 @@ import { exec, init, destroy, getContent } from 'tex'
 ### Parameters
 
 - `element`: The HTML element (either `<textarea>` or `<div>`) to be converted into a text editor.
-- `buttons`: An array of predefined buttons to be displayed in the editor toolbar.
-- `defaultParagraphSeparator` : 'p', // optional, default = 'div'
-- `styleWithCSS`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
+- `buttons`: An array of buttons to be displayed in the editor toolbar.
+- `plugins`: An array of plugins.
+- `paragraphSeparator` : 'p', // optional, default = 'div'
+- `cssStyle`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
 - `theme`: 'dark' | default (light),
 - `onChange`: A callback function to be executed when the content of the editor changes.
 
@@ -99,7 +101,7 @@ tex.exec(command<string>, value<string>)
 tex.destroy(document.getElementById("editor"));
 ```
 
-### List of buttons
+### List of predefined buttons
 
 - fontSize
 - bold
@@ -128,6 +130,29 @@ tex.destroy(document.getElementById("editor"));
 - justifyFull
 - justifyLeft
 - justifyRight
+
+## Plugins
+```js
+var pluginImageUpload = {
+    name: 'pluginImageUpload',
+    icon: '-↑-',
+    title: 'Image Upload',
+    result: function(res) {
+        //Example function to display an input and upload the image.
+    }
+};
+```
+
+Initialise the button in the position you want and the plugin, like this:
+```js
+ tex.init({
+    element: document.getElementById("editor"),
+    buttons: ['pluginImageUpload', 'bold', 'fontSize', 'bold', 'italic'],
+    plugins: [pluginImageUpload],
+    onChange: () => {
+    }
+});
+```
 
 ## Styles
 For example:
