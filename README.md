@@ -10,6 +10,7 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 - Simple and intuitive user interface.
 - Wide selection of predefined buttons for text formatting.
 - Support for inserting HTML directly into the editor.
+- Support for plugins.
 - Easily Customizable themes to fit your website design.
 - Ultra lightweight and fast.
 - Light and dark mode.
@@ -20,7 +21,7 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 
 | library       | size (min+gzip) | size (min) | jquery | bootstrap | react | link |
 |---------------|-----------------|------------|--------|-----------|-------|------|
-| TEX          | 1.8kB          | 4.5kB     |        |           |       | https://github.com/marcellov7/tex |
+| TEX          | 2.3kB          | 6.3kB     |        |           |       | https://github.com/marcellov7/tex |
 | quill         | 43kB            | 205kB      |        |           |       | https://github.com/quilljs/quill |
 | trix          | 47kB            | 204kB      |        |           |       | https://github.com/basecamp/trix |
 | ckeditor      | 163kB           | 551kB      |        |           |       | https://ckeditor.com |
