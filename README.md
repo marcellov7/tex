@@ -76,7 +76,8 @@ import { exec, init, destroy, getContent } from 'tex'
 ### Parameters
 
 - `element`: The HTML element (either `<textarea>` or `<div>`) to be converted into a text editor.
-- `buttons`: An array of predefined buttons to be displayed in the editor toolbar.
+- `buttons`: An array of buttons to be displayed in the editor toolbar.
+- `plugins`: An array of plugins.
 - `paragraphSeparator` : 'p', // optional, default = 'div'
 - `cssStyle`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
 - `theme`: 'dark' | default (light),
@@ -99,7 +100,7 @@ tex.exec(command<string>, value<string>)
 tex.destroy(document.getElementById("editor"));
 ```
 
-### List of buttons
+### List of predefined buttons
 
 - fontSize
 - bold
