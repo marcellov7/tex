@@ -35,6 +35,7 @@
 }
 
 .tex-button {
+  position: relative;
   background-color: #f7f7f7;
   border: none;
   cursor: pointer;
@@ -71,4 +72,21 @@
   background-color: white;
   border: 1px solid #ccc;
   padding:5px;
+}
+
+.tex-button > *:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 30px;
+  width: 30px;
+  /* opacity: 0; */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
 }

@@ -77,8 +77,8 @@ import { exec, init, destroy, getContent } from 'tex'
 
 - `element`: The HTML element (either `<textarea>` or `<div>`) to be converted into a text editor.
 - `buttons`: An array of predefined buttons to be displayed in the editor toolbar.
-- `defaultParagraphSeparator` : 'p', // optional, default = 'div'
-- `styleWithCSS`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
+- `paragraphSeparator` : 'p', // optional, default = 'div'
+- `cssStyle`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
 - `theme`: 'dark' | default (light),
 - `onChange`: A callback function to be executed when the content of the editor changes.
 
@@ -128,6 +128,29 @@ tex.destroy(document.getElementById("editor"));
 - justifyFull
 - justifyLeft
 - justifyRight
+
+## Plugins
+```js
+var pluginImageUpload = {
+    name: 'pluginImageUpload',
+    icon: '-↑-',
+    title: 'Image Upload',
+    result: function(res) {
+        //Example function to display an input and upload the image.
+    }
+};
+```
+
+Initialise the button in the position you want and the plugin, like this:
+```js
+ tex.init({
+    element: document.getElementById("editor"),
+    buttons: ['pluginImageUpload', 'bold', 'fontSize', 'bold', 'italic'],
+    plugins: [pluginImageUpload],
+    onChange: () => {
+    }
+});
+```
 
 ## Styles
 For example:

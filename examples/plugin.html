@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEX.js</title>
+    <link rel="stylesheet" type="text/css" href="../src/tex.css">
+    <script src="../src/tex.js"></script>
+
+</head>
+<body>
+    <div id="editor">Hello</div>
+
+    <script>
+    const tex = window.tex;
+
+    var pluginImageUpload = {
+        name: 'pluginImageUpload',
+        icon: '↑ Upload',
+        title: 'Image Upload',
+        result: function(res) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.addEventListener('change', function() {
+
+                var file = input.files[0];
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('image', file);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '{UPLOAD_URL}', true);
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            tex.exec('insertImage', xhr.imageUrl);
+                        }
+                    };
+                    xhr.send(formData);
+                }
+            });
+            input.click();
+        }
+    };
+
+    tex.init({
+        element: document.getElementById("editor"),
+        buttons: ['pluginImageUpload','fontSize', 'bold', 'italic', 'underline'],
+        plugins: [pluginImageUpload],
+        onChange: (content) => {
+            console.log(content);
+        }
+    });
+    </script>
+</body>
+</html>
