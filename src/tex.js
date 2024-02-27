@@ -287,7 +287,7 @@ var init = settings => {
     }
   }
   appendChild(editorContainer, content)
-  appendChild(settings.element.parentNode, editorContainer)
+  settings.element.parentNode.insertBefore(editorContainer, settings.element.nextSibling);
 
   let actions = []
 
