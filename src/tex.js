@@ -377,6 +377,7 @@ content.oninput = ({ target: { firstChild } }) => {
 htmlContent.oninput = ({ target: { firstChild } }) => {
   content.innerHTML = htmlContent.value
   settings.element.value = content.innerHTML
+  settings.onChange(content.innerHTML)
 }
 
 return settings.element
