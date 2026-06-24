@@ -265,9 +265,8 @@ var setContent = (el, content) => {
   contentElement.innerHTML = content
   element.querySelector('.htmlContent').value = content
   el.value = content
+  if (element.texOnChange) element.texOnChange(content)
 }
-
-
 
 var init = settings => {
   var theme = settings.theme || 'light'
@@ -276,6 +275,7 @@ var init = settings => {
   editorContainer.className = 'tex-container'
   editorContainer.classList.add(`theme-${theme}`)
   editorContainer.setAttribute("tex-id", settings.element.id)
+  editorContainer.texOnChange = settings.onChange
   var actionbar = createElement('div')
   actionbar.className = 'tex-actionbar'
   appendChild(editorContainer, actionbar)
