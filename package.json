@@ -3,19 +3,14 @@
   "version": "1.0.0",
   "description": "Ultra-lightweight WYSIWYG rich text editor in pure JavaScript, no dependencies. Works with both <textarea> and <div> elements.",
   "main": "src/tex.js",
-  "unpkg": "src/tex.min.js",
-  "jsdelivr": "src/tex.min.js",
+  "unpkg": "src/tex.js",
+  "jsdelivr": "src/tex.js",
   "style": "src/tex.css",
   "files": [
     "src",
     "README.md",
     "LICENSE"
   ],
-  "scripts": {
-    "build:js": "terser src/tex.js -c -m -o src/tex.min.js",
-    "build:css": "cleancss -o src/tex.min.css src/tex.css",
-    "build": "npm run build:js && npm run build:css"
-  },
   "keywords": [
     "wysiwyg",
     "editor",
@@ -35,9 +30,5 @@
     "url": "https://github.com/marcellov7/tex/issues"
   },
   "author": "Marcello Violini (marcellov7)",
-  "license": "MIT",
-  "devDependencies": {
-    "terser": "^5.31.0",
-    "clean-css-cli": "^5.6.3"
-  }
+  "license": "MIT"
 }
