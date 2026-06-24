@@ -90,7 +90,7 @@ tex.getContent(document.getElementById("editor"));
 ```
 ### Set Content
 ```javascript
-tex.setContent(document.getElementById("editor"),"<p>Text in <strong>HTML</strong> format")
+tex.setContent(document.getElementById("editor"), "<p>Text in <strong>HTML</strong> format</p>")
 ```
 ### Exec
 ```javascript
