@@ -32,15 +32,29 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 
 ## How to Use TEX
 
-To use TEX in your project, follow these simple steps:
+You can use TEX either via a `<script>` tag (CDN) or by installing it from npm.
+
+### Option 1 — CDN / `<script>` tag
 
 1. Link TEX to your HTML:
 ```html
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.css">
 <script src="https://cdn.jsdelivr.net/gh/marcellov7/tex@main/src/tex.min.js"></script>
 ```
+The library is then available as the global `window.tex`.
 
-3. Add HTML elements where you want to display the text editors:
+### Option 2 — npm (bundlers, React, Vue, etc.)
+
+```bash
+npm install tex-editor
+```
+```javascript
+import tex from 'tex-editor'
+// don't forget the stylesheet:
+import 'tex-editor/src/tex.css'
+```
+
+Then add HTML elements where you want to display the text editors:
 
 ```html
 <div id="editor">Hello</div>
@@ -68,10 +82,10 @@ tex.init({
 
 ### API
 ```javascript 
-// ES6
-import tex from 'tex'
+// ES6 (after `npm install tex-editor`)
+import tex from 'tex-editor'
 // or
-import { exec, init, destroy, getContent, setContent } from 'tex'
+import { exec, init, destroy, getContent, setContent } from 'tex-editor'
 ```
 
 ### Parameters
@@ -103,6 +117,41 @@ tex.exec(command<string>, value<string>)
 ```javascript
 tex.destroy(document.getElementById("editor"));
 ```
+
+## Usage in React
+
+TEX works on a real DOM node, so in React you initialize it inside `useEffect`
+using a `ref`, and tear it down in the cleanup function.
+
+```jsx
+import { useEffect, useRef } from 'react'
+import tex from 'tex-editor'
+import 'tex-editor/src/tex.css'
+
+export default function TexEditor({ value = '', onChange }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const element = ref.current
+    tex.init({
+      element,
+      buttons: ['bold', 'italic', 'underline', 'heading1', 'link', 'html'],
+      theme: 'light',
+      onChange,
+    })
+    if (value) tex.setContent(element, value)
+
+    return () => tex.destroy(element)
+  }, [])
+
+  // The element MUST have a unique `id` — TEX uses it internally.
+  return <div id="my-tex-editor" ref={ref} />
+}
+```
+
+> Run `tex.init` only once (empty dependency array). Use `tex.setContent` /
+> `tex.getContent` to read or update the content afterwards. The target element
+> must have a unique `id`, since TEX relies on it to manage the editor instance.
 
 ### List of predefined buttons
 
