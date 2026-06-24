@@ -1,11 +1,18 @@
 {
   "name": "tex-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ultra-lightweight WYSIWYG rich text editor in pure JavaScript, no dependencies. Works with both <textarea> and <div> elements.",
   "main": "src/tex.js",
   "unpkg": "src/tex.js",
   "jsdelivr": "src/tex.js",
   "style": "src/tex.css",
+  "exports": {
+    ".": "./src/tex.js",
+    "./tex.css": "./src/tex.css",
+    "./tex.js": "./src/tex.js",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
   "files": [
     "src",
     "README.md",
