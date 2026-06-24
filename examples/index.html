@@ -12,7 +12,7 @@
     <div id="editor1">Hello</div>
     <textarea id="editor2">Hello world!</textarea>
     <div id="editor3">Hello world!</div>
-
+    <div id="editor4"></div>
     <script>
         const tex = window.tex;
         tex.init({
@@ -40,6 +40,19 @@
                 console.log(content);
             }
         });
+        tex.init({
+            element: document.getElementById("editor4"),
+            buttons: ['bold', 'italic', 'underline', 'strikethrough', 'textColor', 'heading1', 'heading2', 'paragraph', 'removeFormat', 'quote', 'olist', 'ulist', 'code', 'line', 'link', 'image', 'html'],
+            defaultParagraphSeparator: 'p',
+            styleWithCSS: false,
+            theme: 'dark',
+            onChange: (content) => {
+                console.log(content);
+            }
+        });
+        tex.setContent(document.getElementById("editor4"),
+        "<h1>Hello there!</h1><p>This text was added using the <code>setContent</code> method.</p>" +
+        "<p>It allows you to set the content of the editor programmatically.</p>");
 
         // tex.destroy(document.getElementById("editor"));
     </script>

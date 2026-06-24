@@ -71,7 +71,7 @@ tex.init({
 // ES6
 import tex from 'tex'
 // or
-import { exec, init, destroy, getContent } from 'tex'
+import { exec, init, destroy, getContent, setContent } from 'tex'
 ```
 
 ### Parameters
@@ -88,7 +88,10 @@ import { exec, init, destroy, getContent } from 'tex'
 ```javascript
 tex.getContent(document.getElementById("editor"));
 ```
-
+### Set Content
+```javascript
+tex.setContent(document.getElementById("editor"),"<p>Text in <strong>HTML</strong> format")
+```
 ### Exec
 ```javascript
 // Execute a document command.

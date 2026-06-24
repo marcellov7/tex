@@ -259,6 +259,15 @@ var getContent = el => {
   const content = element.querySelector('.tex-content')
   return content.innerHTML
 }
+var setContent = (el, content) => {
+  const element = document.querySelector(`[tex-id="${el.id}"]`)
+  const contentElement = element.querySelector('.tex-content')
+  contentElement.innerHTML = content
+  element.querySelector('.htmlContent').value = content
+  el.value = content
+}
+
+
 
 var init = settings => {
   var theme = settings.theme || 'light'
@@ -383,12 +392,13 @@ htmlContent.oninput = ({ target: { firstChild } }) => {
 return settings.element
 }
 
-var tex = { exec: exec, init: init, destroy: destroy, getContent: getContent }
+var tex = { exec: exec, init: init, destroy: destroy, getContent: getContent, setContent: setContent }
 
 exports.exec = exec
 exports.init = init
 exports.destroy = destroy
 exports.getContent = getContent
+exports.setContent = setContent
 exports['default'] = tex
 
 Object.defineProperty(exports, '__esModule', { value: true })
