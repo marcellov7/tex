@@ -51,7 +51,7 @@ npm install tex-editor
 ```javascript
 import tex from 'tex-editor'
 // don't forget the stylesheet:
-import 'tex-editor/src/tex.css'
+import 'tex-editor/tex.css'
 ```
 
 Then add HTML elements where you want to display the text editors:
@@ -126,7 +126,7 @@ using a `ref`, and tear it down in the cleanup function.
 ```jsx
 import { useEffect, useRef } from 'react'
 import tex from 'tex-editor'
-import 'tex-editor/src/tex.css'
+import 'tex-editor/tex.css'
 
 export default function TexEditor({ value = '', onChange }) {
   const ref = useRef(null)
