@@ -4,11 +4,8 @@
   factory((global.tex = {}));
 }(this, (function (exports) { 'use strict'
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key] } } } return target }
-
 var colorPicker = function(button, type) {
-  var input = button.querySelector('input[type="color"]')
-  input = document.createElement('input')
+  var input = document.createElement('input')
   input.type = 'color'
   input.style.display = 'block'
   button.appendChild(input)
@@ -28,8 +25,7 @@ var colorPicker = function(button, type) {
 }
 
 var selectOptions = function(button) {
-  var input = button.querySelector('select')
-  input = document.createElement('select')
+  var input = document.createElement('select')
   const fontSizes = [3, 4, 5, 6, 7]
   fontSizes.forEach(size => {
     const option = document.createElement('option')
@@ -231,36 +227,38 @@ var defaultActions = {
 
 var destroy = el => {
   var element = document.querySelector(`[tex-id="${el.id}"]`)
+  if (!element) return
   var elementBase = document.getElementById(el.id)
   var content = element.querySelector('.tex-content')
   var actionbar = element.querySelector('.tex-actionbar')
-  if (element) {
-    var contentClone = content.cloneNode(true)
-    content.parentNode.replaceChild(contentClone, content)
 
-    var actionbarClone = actionbar.cloneNode(true)
-    actionbar.parentNode.replaceChild(actionbarClone, actionbar)
+  var contentClone = content.cloneNode(true)
+  content.parentNode.replaceChild(contentClone, content)
 
-    actionbarClone.remove()
+  var actionbarClone = actionbar.cloneNode(true)
+  actionbar.parentNode.replaceChild(actionbarClone, actionbar)
 
-    if (elementBase.tagName.toLowerCase() === 'textarea') {
-      elementBase.style.display = 'block'
-      element.remove()
-    } else { 
-      element.innerHTML = contentClone.innerHTML
-      element.removeAttribute("tex-id")
-      element.classList.remove("theme-light", "theme-dark", "tex-container")
-    }
+  actionbarClone.remove()
+
+  if (elementBase.tagName.toLowerCase() === 'textarea') {
+    elementBase.style.display = 'block'
+    element.remove()
+  } else {
+    element.innerHTML = contentClone.innerHTML
+    element.removeAttribute("tex-id")
+    element.classList.remove("theme-light", "theme-dark", "tex-container")
   }
 }
 
 var getContent = el => {
   const element = document.querySelector(`[tex-id="${el.id}"]`)
+  if (!element) return
   const content = element.querySelector('.tex-content')
   return content.innerHTML
 }
 var setContent = (el, content) => {
   const element = document.querySelector(`[tex-id="${el.id}"]`)
+  if (!element) return
   const contentElement = element.querySelector('.tex-content')
   contentElement.innerHTML = content
   element.querySelector('.htmlContent').value = content
@@ -269,6 +267,8 @@ var setContent = (el, content) => {
 }
 
 var init = settings => {
+  if (document.querySelector(`[tex-id="${settings.element.id}"]`)) return settings.element
+  var isTextarea = settings.element.tagName.toLowerCase() === 'textarea'
   var theme = settings.theme || 'light'
   var paragraphSeparator = settings[paragraphSeparatorString] || 'div'
   var editorContainer = createElement('div')
@@ -283,8 +283,11 @@ var init = settings => {
   var content = settings.element.content = createElement('div')
   content.contentEditable = true
   content.className = 'tex-content tex-editor'
+  content.setAttribute('role', 'textbox')
+  content.setAttribute('aria-multiline', 'true')
+  content.setAttribute('aria-label', settings.ariaLabel || 'Rich text editor')
 
-  if (settings.element.tagName.toLowerCase() === 'textarea') {
+  if (isTextarea) {
     content.innerHTML = settings.element.value
   } else {
     content.innerHTML = settings.element.innerHTML
@@ -300,26 +303,24 @@ var init = settings => {
 
   let actions = []
 
+  var actionsMap = defaultActions
+  if (settings.plugins) {
+    actionsMap = { ...defaultActions }
+    settings.plugins.forEach(plugin => { actionsMap[plugin.name] = plugin })
+  }
+
   if (settings.buttons) {
-
-    if (settings.plugins) {
-      console.log(settings.plugins)
-      settings.plugins.forEach(function(plugin) {
-        defaultActions[plugin.name] = plugin
-      })
-    }
-
     actions = settings.buttons.map(buttonKey => {
-      var defaultAction = defaultActions[buttonKey]
+      var defaultAction = actionsMap[buttonKey]
       if (defaultAction) {
         return { icon: defaultAction.icon, title: defaultAction.title, key: buttonKey, result: defaultAction.result }
       }
     }).filter(action => action !== undefined)
   } else if (settings.actions) {
     actions = settings.actions.map(action => {
-      if (typeof action === 'string') return defaultActions[action]
+      if (typeof action === 'string') return actionsMap[action]
       else if (action.name === 'custom') return { icon: action.icon, title: action.title, result: action.result }
-      else if (defaultActions[action.name]) return { ...defaultActions[action.name], ...action }
+      else if (actionsMap[action.name]) return { ...actionsMap[action.name], ...action }
       return action
     })
   }
@@ -330,10 +331,16 @@ actions.forEach(action => {
   button.innerHTML = "<span>"+action.icon+"</span>"
   button.title = action.title
   button.setAttribute('type', 'button')
+  button.setAttribute('aria-label', action.title)
   button.onclick = () => action.result({action, content, button}) && content.focus()
 
   if (action.state) {
-    var handler = () => button.classList[action.state() ? 'add' : 'remove']('tex-button-selected')
+    button.setAttribute('aria-pressed', 'false')
+    var handler = () => {
+      var on = action.state()
+      button.classList[on ? 'add' : 'remove']('tex-button-selected')
+      button.setAttribute('aria-pressed', on)
+    }
     addEventListener(content, 'keyup', handler)
     addEventListener(content, 'mouseup', handler)
     addEventListener(button, 'click', handler)
@@ -356,7 +363,7 @@ actions.forEach(action => {
 if (settings.cssStyle) exec('styleWithCSS')
 exec(paragraphSeparatorString, paragraphSeparator)
 
-if (settings.element.tagName.toLowerCase() === 'textarea') {
+if (isTextarea) {
   settings.element.style.display = 'none'
 } else {
   document.getElementById(settings.element.id).remove()
@@ -374,9 +381,9 @@ content.oninput = ({ target: { firstChild } }) => {
   if (firstChild && firstChild.nodeType === 3) exec(formatBlock, `<${paragraphSeparator}>`)
   else if (content.innerHTML === '<br>') content.innerHTML = ''
 
-  settings.onChange(content.innerHTML)
+  settings.onChange && settings.onChange(content.innerHTML)
 
-  if (settings.element.tagName.toLowerCase() === 'textarea') {
+  if (isTextarea) {
     settings.element.value = content.innerHTML
   }
   
@@ -386,7 +393,7 @@ content.oninput = ({ target: { firstChild } }) => {
 htmlContent.oninput = ({ target: { firstChild } }) => {
   content.innerHTML = htmlContent.value
   settings.element.value = content.innerHTML
-  settings.onChange(content.innerHTML)
+  settings.onChange && settings.onChange(content.innerHTML)
 }
 
 return settings.element
