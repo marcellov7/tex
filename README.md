@@ -21,7 +21,7 @@ TEX is a ultra-lightweight and straightforward JavaScript library for creating r
 
 | library       | size (min+gzip) | size (min) | jquery | bootstrap | react | link |
 |---------------|-----------------|------------|--------|-----------|-------|------|
-| TEX          | 2.3kB          | 6.3kB     |        |           |       | https://github.com/marcellov7/tex |
+| TEX          | 2.4kB          | 6.6kB     |        |           |       | https://github.com/marcellov7/tex |
 | quill         | 43kB            | 205kB      |        |           |       | https://github.com/quilljs/quill |
 | trix          | 47kB            | 204kB      |        |           |       | https://github.com/basecamp/trix |
 | ckeditor      | 163kB           | 551kB      |        |           |       | https://ckeditor.com |
@@ -93,9 +93,10 @@ import { exec, init, destroy, getContent, setContent } from 'tex-editor'
 - `element`: The HTML element (either `<textarea>` or `<div>`) to be converted into a text editor.
 - `buttons`: An array of buttons to be displayed in the editor toolbar.
 - `plugins`: An array of plugins.
-- `paragraphSeparator` : 'p', // optional, default = 'div'
+- `defaultParagraphSeparator` : 'p', // optional, default = 'div'
 - `cssStyle`: false | true,   // Outputs <span style="font-weight: bold;"></span> instead of <b></b> 
 - `theme`: 'dark' | default (light),
+- `ariaLabel`: Accessible label for the editable area (optional, default = 'Rich text editor').
 - `onChange`: A callback function to be executed when the content of the editor changes.
 
 ### Get Content

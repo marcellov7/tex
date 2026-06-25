@@ -64,14 +64,7 @@
 }   
 
 .tex-button-selected {
-  background-color: #F0F0F0; 
-}
-
-.tex-modal{
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding:5px;
+  background-color: #F0F0F0;
 }
 
 .tex-button > *:nth-child(2) {
